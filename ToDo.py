@@ -5,11 +5,9 @@ todolist = []
 
 # Show the menu with the options of the ToDo list
 def showMenuOptions():
-    print("")
-    print("")
+    print("\n")
     print("Please select an option: ")
-    print("")
-    print("")
+    print("\n")
     print("1. Create a task")
     print("2. Mark a task as completed")
     print("3. Erase a task")
