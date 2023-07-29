@@ -19,7 +19,7 @@ python3 -m venv virtual_env_name
 source virtual_env_name/bin/activate
 ```
 - The libraries we need to install are `Selenium` to automate processes, `BeautifulSoup` to scrap the information from the web pages and a ``mysql-python-connector``, so:
-```bash
+```shell
 pip install selenium
 pip install bs4
 pip install mysql-connector-python
