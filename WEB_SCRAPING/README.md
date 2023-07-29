@@ -12,3 +12,9 @@ python3 -m venv virtual_env_name
 ```
 source virtual_env_name/bin/activate
 ```
+The libraries we need to install are `Selenium` to automate processes and `BeautifulSoup`, so:
+```
+pip install selenium
+pip install bs4
+pip install mysql-connector-python
+```
