@@ -1,0 +1,15 @@
+Amazon products information:
+
+- URL of the results:   https://www.amazon.es/s?k=logitech+c922&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=N76EZZXYML22&sprefix=logitech+c922%2Caps%2C107&ref=nb_sb_noss_1
+- Product:  <div class="sg-col-4-of-24 sg-col-4-of-12 s-result-item s-asin sg-col-4-of-16 sg-col s-widget-spacing-small sg-col-4-of-20">
+- Name:     <span class="a-size-base-plus a-color-base a-text-normal">
+- Price:    <span class="a-price">
+- URL:      <a class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal">
+
+eBay products information:
+
+- URL of the results:   https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=logitech+c922&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0
+- Product:     <li class="s-item s-item__pl-on-bottom">
+- Name:        <span class="s-item__title">
+- Price:       <span class="s-item__price">
+- URL:         <a class="s-item__link">
