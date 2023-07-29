@@ -28,7 +28,7 @@ pip install mysql-connector-python
 
 ## Reading the HTML code
 We will need 5 features from both pages, Amazon and eBay. <sub> The sample photos are from Amazon, you only have to do the same at eBay's web page </sub>
-- 1. URL of the results: The one is in the search bar when you are looking for many products with a similar name
+- 1. URL of the results: The one is in the search bar when you are looking for many products with the similar name
 - 2. HTML product element:
  ![1](https://github.com/RogerCL24/Web-Scraping/assets/90930371/9be528f9-3500-48d4-acc6-2470aa9968f6)
  
