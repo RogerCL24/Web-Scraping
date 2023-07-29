@@ -1,6 +1,5 @@
 # SimplePyProject
-ToDoList with python in CLI
-
+ToDoList with python in CLI <sub> To warm up </sub>
 A simple To-Do list that works on the CLI, with 5 options 
 
 -Create a task
