@@ -1,9 +1,9 @@
 # Web scraping
 
 ## Setup
-In order to use the Mysql DB we install [`XAMPP`](https://www.apachefriends.org/es/index.html) to use an Apache server to host it, this way we handle the DB with ``phpmyadmin`` in the localhost.
+1. In order to use the Mysql DB we install [`XAMPP`](https://www.apachefriends.org/es/index.html) to use an Apache server to host it, this way we handle the DB with ``phpmyadmin`` in the localhost.
 
-We will be using de virtual environment from python in vscode
+2. We will be using de virtual environment from python in vscode
 - First we open the console and type:
 ```
 python3 -m venv virtual_env_name
@@ -19,3 +19,4 @@ pip install selenium
 pip install bs4
 pip install mysql-connector-python
 ```
+3. Finally we need the google chrome driver so as to connect our pyhton program to the google browse, to get the driver we only need to access [here](https://sites.google.com/chromium.org/driver/downloads) and select the google chrome version we have, download the zip and that's it.
