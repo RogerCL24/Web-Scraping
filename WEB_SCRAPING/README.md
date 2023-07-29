@@ -3,7 +3,7 @@
 ## Setup
 1. In order to use the Mysql DB we install [`XAMPP`](https://www.apachefriends.org/es/index.html) to use an Apache server to host it, this way we handle the DB with ``phpmyadmin`` in the localhost.
 - To run the control panel we move to the directory it's downloaded, by default `/opt/lampp` and we execute it:
-```shell
+```bash
 cd /opt/lampp
 sudo ./manager-linux-x64.run
 ```
