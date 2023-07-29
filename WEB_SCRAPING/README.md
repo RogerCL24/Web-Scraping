@@ -41,5 +41,5 @@ We will need 5 features from both pages, Amazon and eBay. <sub> The sample photo
 - 5. HTML URL element:
 ![4](https://github.com/RogerCL24/Web-Scraping/assets/90930371/3eda05f2-50d2-4a5c-b67a-8bacbdef1ab3)
 
-All the relevant information <sub> the html elements </sub> are marked with **Red** squares and you can find all the elements already written in [info.txt](info.txt)
+All the relevant information <sub> the html elements </sub> is marked with **Red** squares and you can find all the elements already written in [info.txt](info.txt)
 
