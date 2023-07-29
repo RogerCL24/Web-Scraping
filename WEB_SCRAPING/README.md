@@ -1,8 +1,9 @@
 # Web scraping
 
 ## Setup
+In order to use the Mysql DB we install (`XAMPP`)[https://www.apachefriends.org/es/index.html] to use an Apache server to host it
 
-We will be using de virtual environmente from python in vscode
+We will be using de virtual environment from python in vscode
 - First we open the console and type:
 ```
 python3 -m venv virtual_env_name
