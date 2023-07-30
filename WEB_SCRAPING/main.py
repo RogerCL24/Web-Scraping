@@ -30,7 +30,6 @@ def get_amazon_object(soup):
     selected = int(input("Select a product from the Amazon's store: "))
     amazon_url = products[selected - 1].find('a',{'class':'a-link-normal s-no-outline'}).attrs['href']
     amazon_price = products[selected - 1].find('span',{'class':'a-price'}).text
-    # 699,00 €699,00€
     return amazon_url, amazon_price
 
 
@@ -47,7 +46,6 @@ def get_ebay_object(soup):
     selected = int(input("Select a product from the eBay's store: "))
     ebay_url = products[selected - 1].find('a', {'class':'s-item__link'}).attrs['href']
     ebay_price = products[selected - 1].find('span',{'class':'s-item__price'}).text
-    # 1.350,18 EUR
     return ebay_url, ebay_price
 
 def init():
