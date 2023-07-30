@@ -10,6 +10,6 @@ eBay products information:
 
 - URL of the results:   https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=logitech+c922&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0
 - Product:     <li class="s-item s-item__pl-on-bottom">
-- Name:        <span class="s-item__title">
+- Name:        <div class="s-item__title">
 - Price:       <span class="s-item__price">
 - URL:         <a class="s-item__link">
