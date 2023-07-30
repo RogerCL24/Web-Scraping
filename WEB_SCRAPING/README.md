@@ -1,6 +1,6 @@
 # Web scraping
 
-<sub> All the pyhton code you see here is in [main.py](main.py) </sub>
+> All the pyhton code you see here is in [main.py](main.py)
 
 ## Setup
 1. In order to use the Mysql DB we install [`XAMPP`](https://www.apachefriends.org/es/index.html) to use an Apache server to host it, this way we handle the DB with ``phpmyadmin`` in the localhost.
