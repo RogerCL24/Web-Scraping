@@ -43,3 +43,19 @@ We will need 5 features from both pages, Amazon and eBay. <sub> The sample photo
 
 All the relevant information <sub> the html elements </sub> is marked with **Red** squares and you can find all the elements already written in [info.txt](info.txt)
 
+## Products content
+We need a function to read all the html code from the web page searched through the url from [info.txt](info.txt), inserting the product name you want to search:
+```python
+def get_soup(url):  # web page content 
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option('excludeSwitches',['enable-logging'])
+    service = Service('driver/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.get(url)
+    sleep(3)
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    driver.close()
+    return soup
+```
+
