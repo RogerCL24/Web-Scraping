@@ -44,7 +44,18 @@ We will need 5 features from both pages, Amazon and eBay. <sub> The sample photo
 All the relevant information <sub> the html elements </sub> is marked with **Red** squares and you can find all the elements already written in [info.txt](info.txt)
 
 ## Products content
-We need a function to read all the html code from the web page searched through the url from [info.txt](info.txt), inserting the product name you want to search:
+1. First we need the url where the web page with all the products we are searching for are listed, namely, the url from [info.txt](info.txt) <sub> URL from the results </sub>
+```python
+def init():
+    name = input("Write the product name to search: ").replace(" ", "+")
+    amazon_result_url = f'https://www.amazon.es/s?k={name}&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=N76EZZXYML22&sprefix={name}%2Caps%2C107&ref=nb_sb_noss_1'
+    ebay_result_url = f'https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={name}&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0'
+    amazon_soup = get_soup(amazon_result_url)
+    ebay_soup = get_soup(ebay_result_url)
+```
+- We replace the example name for the name of the product we are searching, then with that url we pass it as a parameter to another function
+
+2. This function reads all the html code using the ``selenium`` library and the driver formerly downloaded
 ```python
 def get_soup(url):  # web page content 
     options = webdriver.ChromeOptions()
@@ -58,4 +69,21 @@ def get_soup(url):  # web page content
     driver.close()
     return soup
 ```
+
+3. Finally the function that will select the features we really need from all the html code <sub> the `soup` parameter </sub>, with the library ``BeautifulSoup`` we can obtain the exact elements from the html web page and then print it to the console.
+
+```python
+def get_amazon_object(soup):
+    products = soup.find_all('div', {'class': 'sg-col-4-of-24 sg-col-4-of-12 s-result-item s-asin sg-col-4-of-16 sg-col s-widget-spacing-small sg-col-4-of-20'})
+    print('Amazon products\n')
+    for i, product in enumerate(products):
+        try:
+            name = product.find('span', {'class':'a-size-base-plus a-color-base a-text-normal'}).text
+            price = product.find('span',{'class':'a-price'}).text
+            print(f'{i+1}. {name}. Price: {price}')
+        except:
+            pass
+```
+
+
 
