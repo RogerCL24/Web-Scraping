@@ -46,7 +46,7 @@ We will need 5 features from both pages, Amazon and eBay. <sub> The sample photo
 All the relevant information <sub> the html elements </sub> is marked with **Red** squares and you can find all the elements already written in [info.txt](info.txt)
 
 ## Products content
-1. First we need the url where the web page with all the products we are searching for are listed, namely, the url from [info.txt](info.txt) <sub> URL from the results </sub>
+1. First we need the url where the web page with all the products we are searching for are listed, namely, the url from [info.txt](info.txt) <sub> URL of the results </sub>
 ```python
 def init():
     name = input("Write the product name to search: ").replace(" ", "+")
