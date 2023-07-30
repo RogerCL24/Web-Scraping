@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 from time import sleep
+from connection import *
+from products import Products
 
 def get_soup(url):  # web page content 
     options = webdriver.ChromeOptions()
@@ -25,6 +27,11 @@ def get_amazon_object(soup):
             print(f'{i+1}. {name}. Price: {price}')
         except:
             pass
+    selected = int(input("Select a product from the Amazon's store: "))
+    amazon_url = products[selected - 1].find('a',{'class':'a-link-normal s-no-outline'}).attrs['href']
+    amazon_price = products[selected - 1].find('span',{'class':'a-price'}).text
+    # 699,00 €699,00€
+    return amazon_url, amazon_price
 
 
 def get_ebay_object(soup):
@@ -37,6 +44,11 @@ def get_ebay_object(soup):
             print(f'{i+1}. {name}. Price: {price}')
         except:
             pass
+    selected = int(input("Select a product from the eBay's store: "))
+    ebay_url = products[selected - 1].find('a', {'class':'s-item__link'}).attrs['href']
+    ebay_price = products[selected - 1].find('span',{'class':'s-item__price'}).text
+    # 1.350,18 EUR
+    return ebay_url, ebay_price
 
 def init():
     name = input("Write the product name to search: ").replace(" ", "+")
@@ -44,11 +56,12 @@ def init():
     ebay_result_url = f'https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={name}&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0'
     amazon_soup = get_soup(amazon_result_url)
     ebay_soup = get_soup(ebay_result_url)
-    get_amazon_object(amazon_soup)
+    amazon_url, amazon_price = get_amazon_object(amazon_soup)
     print('\n')
-    get_ebay_object(ebay_soup)
-
-
+    ebay_url, ebay_price = get_ebay_object(ebay_soup)
+    name.replace('+', ' ')
+    products = Products(name, amazon_url, ebay_url, amazon_price, ebay_price)
+    print(products.save_products())
 
 
 if __name__ == "__main__":
