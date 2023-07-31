@@ -11,7 +11,7 @@ def get_soup(url):  # web page content
     service = Service('driver/chromedriver')
     driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
-    sleep(3)
+    sleep(1)
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
     driver.close()
@@ -30,7 +30,8 @@ def get_amazon_object(soup):
     selected = int(input("Select a product from the Amazon's store: "))
     amazon_url = products[selected - 1].find('a',{'class':'a-link-normal s-no-outline'}).attrs['href']
     amazon_price = products[selected - 1].find('span',{'class':'a-price'}).text
-    return amazon_url, amazon_price
+    # 699,00 €699,00€
+    return amazon_url, amazon_price # should be float
 
 
 def get_ebay_object(soup):
@@ -46,9 +47,23 @@ def get_ebay_object(soup):
     selected = int(input("Select a product from the eBay's store: "))
     ebay_url = products[selected - 1].find('a', {'class':'s-item__link'}).attrs['href']
     ebay_price = products[selected - 1].find('span',{'class':'s-item__price'}).text
-    return ebay_url, ebay_price
+    # 1.350,18 EUR
+    return ebay_url, ebay_price # should be float
+
+def check_price():
+    products = Products(None, None, None, None, None).get_products()
+    for product in products:
+        amazon_soup = get_soup("https://www.amazon.es"+product[2])
+        ebay_soup = get_soup(product[3])
+        new_amazon_price = amazon_soup.find('span',{'class':'a-offscreen'}).text
+        new_ebay_price = ebay_soup.find('div',{'class':'x-price-primary'}).text
+        print(f'Producto {product[1].replace("+"," ")}:')
+        print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') # float
+        print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}') # float
+        
 
 def init():
+    check_price()
     name = input("Write the product name to search: ").replace(" ", "+")
     amazon_result_url = f'https://www.amazon.es/s?k={name}&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=N76EZZXYML22&sprefix={name}%2Caps%2C107&ref=nb_sb_noss_1'
     ebay_result_url = f'https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={name}&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0'
@@ -57,7 +72,6 @@ def init():
     amazon_url, amazon_price = get_amazon_object(amazon_soup)
     print('\n')
     ebay_url, ebay_price = get_ebay_object(ebay_soup)
-    name.replace('+', ' ')
     products = Products(name, amazon_url, ebay_url, amazon_price, ebay_price)
     print(products.save_products())
 

@@ -20,3 +20,15 @@ class Products:
             return "Products stored"
         except mysql.Error as err:
             return "An error has occurred"    
+
+    def get_products(self):
+        try:
+            conn = connect()
+            cursor = conn.cursor()
+            sql = 'SELECT * FROM products'
+            cursor.execute(sql)
+            products = cursor.fetchall()
+            conn.close()
+            return products
+        except mysql.Error as err:
+            return "An error has ocurred"
