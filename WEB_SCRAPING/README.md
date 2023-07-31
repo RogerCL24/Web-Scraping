@@ -89,7 +89,7 @@ def get_amazon_object(soup):
 
 ## Connecting to the DB
 
-The table where we are going to store all the data will be this one:
+1. The table where we are going to store all the data will be this one:
 ```SQL
 CREATE TABLE products (
  id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -101,3 +101,21 @@ CREATE TABLE products (
 );
 ```
 > amazon_price & ebay price fields are VARCHAR() instead of INTEGER because the price format from Amazon and eBay are quite difficult to deal with if we want to cast them to INTEGER data types
+
+2. We will a need an isolated module with the connection functionality, [connection.py](connection.py), with only 1 funciton:
+```python
+def connect():
+    try:
+        connection = mysql.connect(
+            host = 'localhost',
+            user = 'root',
+            password = '',
+            database = 'web_scraping',
+            port = '3306'
+        )
+        print("Connection to the database settled")
+        return connection
+    except mysql.Error as err:
+        print("An error has ocurred: "+err)
+```
+- Using the mysql connector library formerly downloaded to our virtual environment, `host` , `user` and `password` are by default, `port` is not necessary if have the 5432 active for the DB connection but if are using another one indicate it.
