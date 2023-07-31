@@ -118,4 +118,4 @@ def connect():
     except mysql.Error as err:
         print("An error has ocurred: "+err)
 ```
-- Using the mysql connector library formerly downloaded to our virtual environment, `host` , `user` and `password` are by default, `port` is not necessary if have the 5432 active for the DB connection but if are using another one indicate it.
+- Using the mysql connector library formerly downloaded to our virtual environment, `host` , `user` and `password` are by default, `port` is not necessary if you have the 5432 active for the DB connection but if are using another one indicate it.
