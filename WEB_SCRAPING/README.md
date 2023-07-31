@@ -94,9 +94,10 @@ The table where we are going to store all the data will be this one:
 CREATE TABLE products (
  id INTEGER PRIMARY KEY AUTO_INCREMENT,
  name TEXT NOT NULL,
-amazon_url TEXT NOT NULL,
-ebay_url TEXT NOT NULL,
-amazon_price VARCHAR(50) NOT NULL,
-ebay_price VARCHAR(50) NOT NULL
+ amazon_url TEXT NOT NULL,
+ ebay_url TEXT NOT NULL,
+ amazon_price VARCHAR(50) NOT NULL,
+ ebay_price VARCHAR(50) NOT NULL
 );
 ```
+> amazon_price & ebay price fields are VARCHAR() instead of INTEGER because the price format from Amazon and eBay are quite difficult to deal with if we want to cast them to INTEGER data types
