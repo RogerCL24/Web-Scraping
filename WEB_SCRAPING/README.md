@@ -157,7 +157,7 @@ def save_products(self):
 
 2. In the former function we return 2 vars, the url and the price, so we only need to receive that vars in the main functions, `init`, and use the Products class previously implemented:
 ```python
-amazon_url, amazon_price = get_amazon_object(amazon_soup)
+    amazon_url, amazon_price = get_amazon_object(amazon_soup)
     print('\n')
     ebay_url, ebay_price = get_ebay_object(ebay_soup)
     name.replace('+', ' ')
