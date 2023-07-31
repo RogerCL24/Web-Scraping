@@ -87,5 +87,16 @@ def get_amazon_object(soup):
             pass
 ```
 
+## Connecting to the DB
 
-
+The table where we are going to store all the data will be this one:
+```SQL
+CREATE TABLE products (
+ id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ name TEXT NOT NULL,
+amazon_url TEXT NOT NULL,
+ebay_url TEXT NOT NULL,
+amazon_price VARCHAR(50) NOT NULL,
+ebay_price VARCHAR(50) NOT NULL
+);
+```
