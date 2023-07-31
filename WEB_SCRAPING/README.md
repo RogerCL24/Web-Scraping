@@ -169,7 +169,7 @@ def save_products(self):
 ![1](https://github.com/RogerCL24/Web-Scraping/assets/90930371/1536f222-bf8d-4331-b437-987ed08f25ad)
 
 - Now the eBay's product
-![2](https://github.com/RogerCL24/Web-Scraping/assets/90930371/71e2d8af-43ac-47a8-b0e3-fbd7cfc2a780)ç
+![2](https://github.com/RogerCL24/Web-Scraping/assets/90930371/71e2d8af-43ac-47a8-b0e3-fbd7cfc2a780)
 
 - Finally it's stored automatically
 ![3](https://github.com/RogerCL24/Web-Scraping/assets/90930371/aa49b263-9de7-4211-8974-1ba3ccf7b9ca)
