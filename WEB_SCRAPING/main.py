@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 from time import sleep
+from notifypy import Notify
 from connection import *
 from products import Products
 
@@ -31,7 +32,7 @@ def get_amazon_object(soup):
     amazon_url = products[selected - 1].find('a',{'class':'a-link-normal s-no-outline'}).attrs['href']
     amazon_price = products[selected - 1].find('span',{'class':'a-price'}).text
     # 699,00 €699,00€
-    return amazon_url, amazon_price # should be float
+    return amazon_url, amazon_price.split('€')[1].replace('.','').replace(',','.')
 
 
 def get_ebay_object(soup):
@@ -48,7 +49,7 @@ def get_ebay_object(soup):
     ebay_url = products[selected - 1].find('a', {'class':'s-item__link'}).attrs['href']
     ebay_price = products[selected - 1].find('span',{'class':'s-item__price'}).text
     # 1.350,18 EUR
-    return ebay_url, ebay_price # should be float
+    return ebay_url, ebay_price[0:-4].replace('.','').replace(',','.')
 
 def check_price():
     products = Products(None, None, None, None, None).get_products()
@@ -56,11 +57,23 @@ def check_price():
         amazon_soup = get_soup("https://www.amazon.es"+product[2])
         ebay_soup = get_soup(product[3])
         new_amazon_price = amazon_soup.find('span',{'class':'a-offscreen'}).text
+        new_amazon_price = new_amazon_price.split('€')[0].replace('.','').replace(',','.')
         new_ebay_price = ebay_soup.find('div',{'class':'x-price-primary'}).text
+        if new_ebay_price[0] == 'U':    # USD format
+            new_ebay_price = new_ebay_price[3:].replace('.','').replace(',','.')
+        else:                           # EUR format
+            new_ebay_price = new_ebay_price[0:-4].replace('.','').replace(',','.')
         print(f'Producto {product[1].replace("+"," ")}:')
-        print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') # float
-        print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}') # float
-        
+        print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
+        print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
+        if float(new_amazon_price) == float(product[4]):
+            send_alert(f'The product {product[1].replace("+"," ")} price dropped on Amazon')
+
+def send_alert(message):
+    notification = Notify()
+    notification.title = "Product price change"   
+    notification.message = message
+    notification.send()
 
 def init():
     check_price()
