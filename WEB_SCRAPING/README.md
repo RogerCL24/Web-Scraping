@@ -122,7 +122,7 @@ def connect():
 
 3. Finally this connection module is going to be used the `Products` class at [products.py](products.py)
 - The attributes of the class (the elements that will be stored at the table) will be:
-```pyhton
+```python
    def __init__(self, name, amazon_url, ebay_url, amazon_price, ebay_price):
         self.name = name
         self.amazon_url = amazon_url
@@ -131,7 +131,7 @@ def connect():
         self.ebay_price = ebay_price
   ```
 - And the method which is going to insert the elements in the table:
-```
+```python
 def save_products(self):
         try:
             conn = connect()
