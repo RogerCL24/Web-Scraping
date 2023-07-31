@@ -145,3 +145,24 @@ def save_products(self):
         except mysql.Error as err:
             return "An error has occurred"
 ```
+## Storing the data into the DB
+1. We are already showing what products are but now we add a select funciton, we add this code to the `get_amazon_object()` function:
+```python
+ selected = int(input("Select a product from the Amazon's store: "))
+    amazon_url = products[selected - 1].find('a',{'class':'a-link-normal s-no-outline'}).attrs['href']
+    amazon_price = products[selected - 1].find('span',{'class':'a-price'}).text
+    return amazon_url, amazon_price
+```
+<sub> The same for the eBay's prodcuts </sub>
+
+2. In the former function we return 2 vars, the url and the price, so we only need to receive that vars in the main functions, `init`, and use the Products class previously implemented:
+```python
+amazon_url, amazon_price = get_amazon_object(amazon_soup)
+    print('\n')
+    ebay_url, ebay_price = get_ebay_object(ebay_soup)
+    name.replace('+', ' ')
+    products = Products(name, amazon_url, ebay_url, amazon_price, ebay_price)
+    print(products.save_products())
+```
+3. An example
+![try](https://github.com/RogerCL24/Web-Scraping/assets/90930371/52f586ff-c8cc-4cee-b102-b035f0535cee)
