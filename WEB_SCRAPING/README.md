@@ -119,3 +119,29 @@ def connect():
         print("An error has ocurred: "+err)
 ```
 - Using the mysql connector library formerly downloaded to our virtual environment, `host` , `user` and `password` are by default, `port` is not necessary if you have the 5432 active for the DB connection but if are using another one indicate it.
+
+3. Finally this connection module is going to be used the `Products` class at [products.py](products.py)
+- The attributes of the class (the elements that will be stored at the table) will be:
+```pyhton
+   def __init__(self, name, amazon_url, ebay_url, amazon_price, ebay_price):
+        self.name = name
+        self.amazon_url = amazon_url
+        self.ebay_url = ebay_url
+        self.amazon_price = amazon_price
+        self.ebay_price = ebay_price
+  ```
+- And the method which is going to insert the elements in the table:
+```
+def save_products(self):
+        try:
+            conn = connect()
+            cursor = conn.cursor()
+            sql = 'INSERT INTO products (name, amazon_url, ebay_url, amazon_price, ebay_price) VALUES (%s, %s, %s, %s, %s)'
+            data = (self.name, self.amazon_url, self.ebay_url, self.amazon_price, self.ebay_price)
+            cursor.execute(sql, data)
+            conn.commit()
+            conn.close()
+            return "Products stored"
+        except mysql.Error as err:
+            return "An error has occurred"
+```
