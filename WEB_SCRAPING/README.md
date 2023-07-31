@@ -120,7 +120,7 @@ def connect():
 ```
 - Using the mysql connector library formerly downloaded to our virtual environment, `host` , `user` and `password` are by default, `port` is not necessary if you have the 5432 active for the DB connection but if are using another one indicate it.
 
-3. Finally this connection module is going to be used the `Products` class at [products.py](products.py)
+3. Finally this connection module is going to be used by the `Products` class at [products.py](products.py)
 - The attributes of the class (the elements that will be stored at the table) will be:
 ```python
    def __init__(self, name, amazon_url, ebay_url, amazon_price, ebay_price):
