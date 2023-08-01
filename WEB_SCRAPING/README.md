@@ -194,7 +194,7 @@ The idea is every time we execute the program a comparison functionality between
 > This method returns a list (products)
 
 - Now in ``main.py`` we implement a new function which it will get the old prices <sub> `products` var is a list because calls .get_products()</sub> and the new ones <sub> ``new_amazon/ebay_price`` vars:
-  ```pyhthon
+  ```python
     def check_price():
     products = Products(None, None, None, None, None).get_products()
     for product in products:
