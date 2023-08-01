@@ -207,7 +207,7 @@ The idea the following one, every time we execute the program a comparison funct
             new_ebay_price = new_ebay_price[3:].replace('.','').replace(',','.')
         else:                           # EUR format
             new_ebay_price = new_ebay_price[0:-4].replace('.','').replace(',','.')
-        print(f'Producto {product[1].replace("+"," ")}:')
+        print(f'Product {product[1].replace("+"," ")}:')
         print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
         print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
   ```
