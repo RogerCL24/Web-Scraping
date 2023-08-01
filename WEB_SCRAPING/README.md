@@ -175,7 +175,7 @@ def save_products(self):
 ![3](https://github.com/RogerCL24/Web-Scraping/assets/90930371/aa49b263-9de7-4211-8974-1ba3ccf7b9ca)
 
 ## Comparison old vs new prices
-The idea is every time we execute the program a comparison functionality between the old products (the ones that are in the DB) and the new products (the same product in the DB) to check any price update of same product, namely, since the moment was their price consulted (when it was stored in the DB) and now (when we execute the program)
+The idea the following one, is every time we execute the program a comparison functionality between the old products (the ones that are in the DB) and the new products (the same product in the DB) to check any price update of same product, namely, since the moment was their price consulted (when it was stored in the DB) and now (when we execute the program)
 
 - We add a new method to the ``Products`` class in order to select all the products in the `web_scraping` table:
 ```python
