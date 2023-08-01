@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 from time import sleep
+from threading import Thread
 from notifypy import Notify
 from connection import *
 from products import Products
@@ -52,41 +53,61 @@ def get_ebay_object(soup):
     return ebay_url, ebay_price[0:-4].replace('.','').replace(',','.')
 
 def check_price():
-    products = Products(None, None, None, None, None).get_products()
-    for product in products:
-        amazon_soup = get_soup("https://www.amazon.es"+product[2])
-        ebay_soup = get_soup(product[3])
-        new_amazon_price = amazon_soup.find('span',{'class':'a-offscreen'}).text
-        new_amazon_price = new_amazon_price.split('€')[0].replace('.','').replace(',','.')
-        new_ebay_price = ebay_soup.find('div',{'class':'x-price-primary'}).text
-        if new_ebay_price[0] == 'U':    # USD format
-            new_ebay_price = new_ebay_price[3:].replace('.','').replace(',','.')
-        else:                           # EUR format
-            new_ebay_price = new_ebay_price[0:-4].replace('.','').replace(',','.')
-        print(f'Producto {product[1].replace("+"," ")}:')
-        print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
-        print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
-        if float(new_amazon_price) == float(product[4]):
-            send_alert(f'The product {product[1].replace("+"," ")} price dropped on Amazon')
-
+    while True:
+        products = Products(None, None, None, None, None).get_products()
+        for product in products:
+            amazon_soup = get_soup("https://www.amazon.es"+product[2])
+            ebay_soup = get_soup(product[3])
+            new_amazon_price = amazon_soup.find('span',{'class':'a-offscreen'}).text
+            new_amazon_price = new_amazon_price.split('€')[0].replace('.','').replace(',','.')
+            new_ebay_price = ebay_soup.find('div',{'class':'x-price-primary'}).text
+            if new_ebay_price[0] == 'U':    # USD format
+                new_ebay_price = new_ebay_price[3:].replace('.','').replace(',','.')
+            else:                           # EUR format
+                new_ebay_price = new_ebay_price[0:-4].replace('.','').replace(',','.')
+            print(f'Producto {product[1].replace("+"," ")}:')
+            print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
+            print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
+            if float(new_amazon_price) < float(product[4]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on Amazon')
+            if float(new_amazon_price) > float(product[4]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has risen on Amazon')
+            if float(new_ebay_price) < float(product[5]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on eBay')
+            if float(new_ebay_price) > float(product[5]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has risen on eBay')
+            if  float(new_amazon_price) > float(new_ebay_price):
+                send_alert(f'The product {product[1].replace("+"," ")} price on eBay is lower')
+            if float(new_amazon_price) < float(new_ebay_price):
+                send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
+        response = input("You want to keep executing? y/n: ")
+        if response == "y":
+            sleep(60)
+        else:
+            break
+    
 def send_alert(message):
     notification = Notify()
-    notification.title = "Product price change"   
+    notification.title = "Product price change"
     notification.message = message
     notification.send()
 
 def init():
-    check_price()
-    name = input("Write the product name to search: ").replace(" ", "+")
-    amazon_result_url = f'https://www.amazon.es/s?k={name}&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=N76EZZXYML22&sprefix={name}%2Caps%2C107&ref=nb_sb_noss_1'
-    ebay_result_url = f'https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={name}&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0'
-    amazon_soup = get_soup(amazon_result_url)
-    ebay_soup = get_soup(ebay_result_url)
-    amazon_url, amazon_price = get_amazon_object(amazon_soup)
-    print('\n')
-    ebay_url, ebay_price = get_ebay_object(ebay_soup)
-    products = Products(name, amazon_url, ebay_url, amazon_price, ebay_price)
-    print(products.save_products())
+    response = input("You want a new product to be registered? y/n: ")
+    if response == "y":
+        name = input("Write the product name to search: ").replace(" ", "+")
+        amazon_result_url = f'https://www.amazon.es/s?k={name}&__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=N76EZZXYML22&sprefix={name}%2Caps%2C107&ref=nb_sb_noss_1'
+        ebay_result_url = f'https://www.ebay.es/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={name}&_sacat=0&LH_TitleDesc=0&_odkw=c922&_osacat=0'
+        amazon_soup = get_soup(amazon_result_url)
+        ebay_soup = get_soup(ebay_result_url)
+        amazon_url, amazon_price = get_amazon_object(amazon_soup)
+        print('\n')
+        ebay_url, ebay_price = get_ebay_object(ebay_soup)
+        products = Products(name, amazon_url, ebay_url, amazon_price, ebay_price)
+        print(products.save_products())
+
+    thread = Thread(target=check_price) # execute on background
+    thread.start()
 
 
 if __name__ == "__main__":
