@@ -173,3 +173,41 @@ def save_products(self):
 
 - Finally it's stored automatically
 ![3](https://github.com/RogerCL24/Web-Scraping/assets/90930371/aa49b263-9de7-4211-8974-1ba3ccf7b9ca)
+
+## Comparison old vs new prices
+The idea is every time we execute the program a comparison functionality between the old products (the ones that are in the DB) and the new products (the same product in the DB) to check any price update of same product, namely, since the moment was their price consulted (when it was stored in the DB) and now (when we execute the program)
+
+- We add a new method to the ``Products`` class in order to select all the products in the `web_scraping` table:
+```python
+  def get_products(self):
+        try:
+            conn = connect()
+            cursor = conn.cursor()
+            sql = 'SELECT * FROM products'
+            cursor.execute(sql)
+            products = cursor.fetchall()
+            conn.close()
+            return products
+        except mysql.Error as err:
+            return "An error has ocurred"
+```
+> This method returns a list (products)
+
+- Now in ``main.py`` we implement a new function which it will get the old prices <sub> `products` var is a list because calls .get_products()</sub> and the new ones <sub> ``new_amazon/ebay_price`` vars:
+  ```pyhthon
+    def check_price():
+    products = Products(None, None, None, None, None).get_products()
+    for product in products:
+        amazon_soup = get_soup("https://www.amazon.es"+product[2])
+        ebay_soup = get_soup(product[3])
+        new_amazon_price = amazon_soup.find('span',{'class':'a-offscreen'}).text
+        new_amazon_price = new_amazon_price.split('€')[0].replace('.','').replace(',','.')
+        new_ebay_price = ebay_soup.find('div',{'class':'x-price-primary'}).text
+        if new_ebay_price[0] == 'U':    # USD format
+            new_ebay_price = new_ebay_price[3:].replace('.','').replace(',','.')
+        else:                           # EUR format
+            new_ebay_price = new_ebay_price[0:-4].replace('.','').replace(',','.')
+        print(f'Producto {product[1].replace("+"," ")}:')
+        print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
+        print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
+  ```
