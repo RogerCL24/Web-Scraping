@@ -221,18 +221,18 @@ def send_alert(message):
 ```
 - After that we create the notify event triggers in `check_price()` function:
 ```python
-            if float(new_amazon_price) < float(product[4]):
-                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on Amazon')
-            if float(new_amazon_price) > float(product[4]):
-                send_alert(f'The product {product[1].replace("+"," ")} price has risen on Amazon')
-            if float(new_ebay_price) < float(product[5]):
-                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on eBay')
-            if float(new_ebay_price) > float(product[5]):
-                send_alert(f'The product {product[1].replace("+"," ")} price has risen on eBay')
-            if  float(new_amazon_price) > float(new_ebay_price):
-                send_alert(f'The product {product[1].replace("+"," ")} price on eBay is lower')
-            if float(new_amazon_price) < float(new_ebay_price):
-                send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
+ if float(new_amazon_price) < float(product[4]):
+  send_alert(f'The product {product[1].replace("+"," ")} price has dropped on Amazon')
+ if float(new_amazon_price) > float(product[4]):
+  send_alert(f'The product {product[1].replace("+"," ")} price has risen on Amazon')
+ if float(new_ebay_price) < float(product[5]):
+  send_alert(f'The product {product[1].replace("+"," ")} price has dropped on eBay')
+ if float(new_ebay_price) > float(product[5]):
+  send_alert(f'The product {product[1].replace("+"," ")} price has risen on eBay')
+ if  float(new_amazon_price) > float(new_ebay_price):
+  send_alert(f'The product {product[1].replace("+"," ")} price on eBay is lower')
+ if float(new_amazon_price) < float(new_ebay_price):
+  send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
 ```
 
 ## Executing ``check_price()`` on background
