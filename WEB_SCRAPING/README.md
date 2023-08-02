@@ -308,3 +308,11 @@ At ``get_soup()`` function the driver we are using to connect our program to the
 ### URL
 Same thing as the html code and the driver, URL encoding can change.
 
+## CPU Usage
+### Sleeping 
+![CPU_usage_1](https://github.com/RogerCL24/Web-Scraping/assets/90930371/ab8d6663-e806-4be8-8c5b-0e844ccc65a5)
+
+### Executing check
+![CPU_usage_2](https://github.com/RogerCL24/Web-Scraping/assets/90930371/5b435919-aee6-486f-bdbe-d17a15c8ff3a)
+
+
