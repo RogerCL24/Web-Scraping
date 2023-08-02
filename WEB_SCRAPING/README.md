@@ -234,6 +234,8 @@ def send_alert(message):
  if float(new_amazon_price) < float(new_ebay_price):
   send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
 ```
+- For instance
+![notify](https://github.com/RogerCL24/Web-Scraping/assets/90930371/26caa5ff-1233-4d94-94c8-0d1501b44c2c)
 
 ## Executing ``check_price()`` on background
 To execute a function in background we use the `threading` library.
