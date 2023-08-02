@@ -211,3 +211,28 @@ The idea is the following one, every time we execute the program a comparison fu
         print(f'Amazon: Former price: {str(product[4])} // New price: {new_amazon_price}') 
         print(f'eBay: Former price: {str(product[5])} // New price: {new_ebay_price}')
   ```
+- To send a notification we use the ``notifypy`` library and we code a new function to create the notify messages <sub> In main.py </sub>:
+```python
+def send_alert(message):
+    notification = Notify()
+    notification.title = "Product price change"
+    notification.message = message
+    notification.send()
+```
+- After that we create the notify event triggers in `check_price()` function:
+```python
+if float(new_amazon_price) < float(product[4]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on Amazon')
+            if float(new_amazon_price) > float(product[4]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has risen on Amazon')
+            if float(new_ebay_price) < float(product[5]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has dropped on eBay')
+            if float(new_ebay_price) > float(product[5]):
+                send_alert(f'The product {product[1].replace("+"," ")} price has risen on eBay')
+            if  float(new_amazon_price) > float(new_ebay_price):
+                send_alert(f'The product {product[1].replace("+"," ")} price on eBay is lower')
+            if float(new_amazon_price) < float(new_ebay_price):
+                send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
+```
+
+## Executing ``check_price()`` on background
