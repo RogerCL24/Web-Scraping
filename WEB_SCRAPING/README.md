@@ -221,7 +221,7 @@ def send_alert(message):
 ```
 - After that we create the notify event triggers in `check_price()` function:
 ```python
-if float(new_amazon_price) < float(product[4]):
+            if float(new_amazon_price) < float(product[4]):
                 send_alert(f'The product {product[1].replace("+"," ")} price has dropped on Amazon')
             if float(new_amazon_price) > float(product[4]):
                 send_alert(f'The product {product[1].replace("+"," ")} price has risen on Amazon')
