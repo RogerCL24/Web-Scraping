@@ -300,7 +300,7 @@ def check_price():
 
 ## Drawbacks
 ### HTML code
-In `get_amazon_object()` we are depending on the html code from the Amazon web page, in case they change the code (intead of a span the use a div or li for example) our code will not work, therefore before use we have to check our html code at [info.txt](info.txt) match with their html code.
+In `get_amazon_object()` we are depending on the html code from the Amazon web page, in case they change the code (instead of a span they use a div or a li for example) our code will not work, therefore before use the program we have to check our html code at [info.txt](info.txt) match with their html code.
 
 <sub> The same for `get_ebay_object()` </sub>
 ### Google driver
