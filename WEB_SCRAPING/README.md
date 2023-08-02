@@ -306,5 +306,5 @@ In `get_amazon_object()` we are depending on the html code from the Amazon web p
 ### Google driver
 At ``get_soup()`` function the driver we are using to connect our program to the google browse has a determinated version which has to match with the real version of google chrome browse we have (or atleast the one we are going to use), to avoid problems check the version of your google chrome browse to download the proper driver.
 ### URL
-Same thing as the html code and the driver, URL encoding can change.+
+Same thing as the html code and the driver, URL encoding can change.
 
