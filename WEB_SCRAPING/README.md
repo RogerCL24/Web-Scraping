@@ -238,7 +238,7 @@ def send_alert(message):
 ## Executing ``check_price()`` on background
 To execute a function in background we use the `threading` library.
 - In order to select whether we want to register a new product in the DB and compare prices or only compare prices <sub> executing the comparison function on background </sub>, the new init() funciton would be:
-``` pyhton
+``` python
 def init():
     response = input("You want a new product to be registered? y/n: ")
     if response == "y":
