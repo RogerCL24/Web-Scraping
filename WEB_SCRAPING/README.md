@@ -235,7 +235,8 @@ def send_alert(message):
   send_alert(f'The product {product[1].replace("+"," ")} price on Amazon is lower')
 ```
 - For instance
-![notify](https://github.com/RogerCL24/Web-Scraping/assets/90930371/26caa5ff-1233-4d94-94c8-0d1501b44c2c)
+![notify](https://github.com/RogerCL24/Web-Scraping/assets/90930371/5810be57-6b72-46cb-9b3c-a431ff10e9a8)
+
 
 ## Executing ``check_price()`` on background
 To execute a function in background we use the `threading` library.
