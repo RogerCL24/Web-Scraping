@@ -1,5 +1,6 @@
 # Web scraping
 
+> [!NOTE]
 > All the pyhton code you see here is in [main.py](main.py), if it's not said otherwise
 
 ## Setup
@@ -100,6 +101,7 @@ CREATE TABLE products (
  ebay_price VARCHAR(50) NOT NULL
 );
 ```
+> [!NOTE]
 > amazon_price & ebay price fields are VARCHAR() instead of DECIMAL(10,2) because the price format from Amazon and eBay are quite difficult to deal with if we want to cast them to DECIMAL data types, this will be changed in the future for obvious reasons (to operate), by the moment we only want to show them
 
 2. We will a need an isolated module with the connection functionality, [connection.py](connection.py), with only 1 function:
@@ -296,7 +298,8 @@ def check_price():
         else:
             break
 ```
-> OBSERVATION: In this code `check_price()` is executed every minute (60 seconds), to execute it every day, for example, would be `sleep(86400)`
+> [!NOTE]
+> In this code `check_price()` is executed every minute (60 seconds), to execute it every day, for example, would be `sleep(86400)`
 
 ## Drawbacks
 ### HTML code
